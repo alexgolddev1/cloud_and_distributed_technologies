@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: php-cronjob
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: php-container
+            image: php-rest-lab
+            imagePullPolicy: Never
+            command: ["sh", "-c", "echo Kubernetes CronJob works && date"]
+          restartPolicy: OnFailure
